@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - changeset:
+      id: 1
+      author: binkley
+      changes:
+      - empty: {}

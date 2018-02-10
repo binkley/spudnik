@@ -35,12 +35,13 @@
     <properties>
         <!-- @formatter:off -->
         <java.charset>UTF-8</java.charset>
-        <project.build.sourceEncoding>${java.charset}</project.build.sourceEncoding>
-        <project.build.outputEncoding>${java.charset}</project.build.outputEncoding>
-        <project.reporting.sourceEncoding>${java.charset}</project.reporting.sourceEncoding>
-        <project.reporting.outputEncoding>${java.charset}</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <jaxb.version>2.3.0</jaxb.version>
         <kotlin.version>1.2.21</kotlin.version>
+        <project.build.outputEncoding>${java.charset}</project.build.outputEncoding>
+        <project.build.sourceEncoding>${java.charset}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${java.charset}</project.reporting.outputEncoding>
+        <project.reporting.sourceEncoding>${java.charset}</project.reporting.sourceEncoding>
         <!-- @formatter:on -->
     </properties>
 
@@ -77,6 +78,21 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${jaxb.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -89,10 +105,12 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${jaxb.version}</version>
+            <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
