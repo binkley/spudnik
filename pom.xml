@@ -38,6 +38,7 @@
         <java.version>1.8</java.version>
         <jaxb.version>2.3.0</jaxb.version>
         <kotlin.version>1.2.21</kotlin.version>
+        <ktlint.version>0.15.0</ktlint.version>
         <project.build.outputEncoding>${java.charset}</project.build.outputEncoding>
         <project.build.sourceEncoding>${java.charset}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${java.charset}</project.reporting.outputEncoding>
@@ -128,6 +129,54 @@
         <testSourceDirectory>${project.basedir}/src/test/kotlin
         </testSourceDirectory>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>${maven-antrun-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>ktlint</id>
+                        <phase>verify</phase>
+                        <configuration>
+                            <target name="ktlint">
+                                <java taskname="ktlint" dir="${basedir}"
+                                      fork="true" failonerror="true"
+                                      classname="com.github.shyiko.ktlint.Main"
+                                      classpathref="maven.plugin.classpath">
+                                    <arg value="src/**/*.kt"/>
+                                </java>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>ktlint-format</id>
+                        <configuration>
+                            <target name="ktlint">
+                                <java taskname="ktlint" dir="${basedir}"
+                                      fork="true" failonerror="true"
+                                      classname="com.github.shyiko.ktlint.Main"
+                                      classpathref="maven.plugin.classpath">
+                                    <arg value="-F"/>
+                                    <arg value="src/**/*.kt"/>
+                                </java>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.github.shyiko</groupId>
+                        <artifactId>ktlint</artifactId>
+                        <version>${ktlint.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
